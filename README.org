@@ -27,8 +27,8 @@
       1. Build a react project as described in Day 1 exercise - under its own directory
       2. Implement the lesson by following the react exercise in that section.
       3. Add a Jest based test to for that lesson ([[https://jestjs.io/docs/tutorial-react][Testing React]])
-*** Week 2 Objectives
-**** Complete golang course.
+** Week 2 Objectives
+*** Complete golang course.
 1. Complete [[https://go.dev/tour/welcome/1][A Tour of Go]]
 2. Create a new directory for go learning (`learn_go`)
 3. For each exercise - create a subdirectory
@@ -37,11 +37,12 @@
    3. Complete the database access tutorial ([[https://go.dev/doc/tutorial/database-access][Database Access]])
    4. Complete the SQLc tutorial ([[https://docs.sqlc.dev/en/latest/tutorials/getting-started-sqlite.html][SQLC Doc]])
    5. Complete the Webservice tutorial using Golang ([[https://go.dev/doc/tutorial/web-service-gin][Go/Gin]])
-*** Week 3 Objectives
-**** Complete Database and Application Integration
-***** Based on the experiences and learning from Weeks 1 and 2
+   6. Learn how to use the Gin framework ([[https://gin-gonic.com/en/docs/][Gin Framework]])
+** Week 3 Objectives
+*** Complete Database and Application Integration
+**** Based on the experiences and learning from Weeks 1 and 2
 1. Create a new project (glocalbuzz)
-2. Learn how to use the Gin framework ([[https://gin-gonic.com/en/docs/][Gin Framework]])
+
 3. Create a sqlc model with the following tables
    1. USER - (primary_key, email, password, preferred_name, created_at, updated_at)
    2. ROLE - (primary_key, role_name, role_description, created_at, updated_at)
@@ -56,8 +57,8 @@
 6. All the above methods except the =GET /user/<email>= should only be possible if the user has admin role.
 7. The =GET /user/<email>= should only allow the current user (based on the JWT)
 8. Add tests for all the above methods.
-*** Week 4 Objectives
-**** Integrate frontend with backend.
+** Week 4 Objectives
+*** Integrate frontend with backend.
 1. Learn MUI
 2. Create a from scratch react application - with a login page.
 3. If the user successfuly logs in - take them to a user profile page with their role details (calling =GET /user/<email>=)
