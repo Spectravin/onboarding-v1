@@ -1,0 +1,66 @@
+#+title: Spectravin Employee Onboarding Readme
+
+* Spectravin 30, 60, 90 Day Goals
+** Objectives:
+1. Understand spectravin techstack
+2. Gain experience and proficiency with frontend technologies (React + MUI + Styled Components)
+3. Gain experience with Golang for backend technology
+4. Postgresql Databases + SQL Expereince
+5. Deployment technologies - ansible + terraform
+** Week 1 Objectvies
+*** Complete React Course:
+1. Finish the react course : [[https://react.dev/learn][learn react]]
+2. Day 1 - Creating react project without `create-react-app`:
+   1. Read through and understand [[https://react.dev/learn/thinking-in-react][Thinking in React]]
+   2. Checkout the onboarding repository
+   3. create empty project with `pnpm` ([[https://pnpm.io/][pnpm]]) under a directory called day1
+   4. Add development dependencies for typescript, esbuild, eslint, jest
+   5. Add runtime dependencies for react, react-dom, (version 19 or above)
+   6. Setup typescript environment `tsc` and understand all the configuration options ([[https://www.typescriptlang.org/tsconfig/][tsconfig]])
+   7. Create a simple index.html and simple =src/App.tsx= that has a functional component that uses
+      jsx to say "Hello, World"
+   8. Setup package.json build scripts using esbuild and tsc to transpile project. ([[https://docs.npmjs.com/cli/v11/configuring-npm/package-json][package.json]])
+   9. Use package.json scripts to run using http-server and run a dev server.
+   10. Send this as a pull recquest 
+3. Days 2 - 5  - Complete [[https://react.dev/learn][Learn React]] Course
+   1. For each subsection of the learn react course
+      1. Build a react project as described in Day 1 exercise - under its own directory
+      2. Implement the lesson by following the react exercise in that section.
+      3. Add a Jest based test to for that lesson ([[https://jestjs.io/docs/tutorial-react][Testing React]])
+*** Week 2 Objectives
+**** Complete golang course.
+1. Complete [[https://go.dev/tour/welcome/1][A Tour of Go]]
+2. Create a new directory for go learning (`learn_go`)
+3. For each exercise - create a subdirectory
+   1. Complete Introduction to Go ([[https://go.dev/doc/tutorial/getting-started][Getting Started - Go]])
+   2. Complete the create module tutorial ([[https://go.dev/doc/tutorial/create-module][Create Module]])
+   3. Complete the database access tutorial ([[https://go.dev/doc/tutorial/database-access][Database Access]])
+   4. Complete the SQLc tutorial ([[https://docs.sqlc.dev/en/latest/tutorials/getting-started-sqlite.html][SQLC Doc]])
+   5. Complete the Webservice tutorial using Golang ([[https://go.dev/doc/tutorial/web-service-gin][Go/Gin]])
+*** Week 3 Objectives
+**** Complete Database and Application Integration
+***** Based on the experiences and learning from Weeks 1 and 2
+1. Create a new project (glocalbuzz)
+2. Learn how to use the Gin framework ([[https://gin-gonic.com/en/docs/][Gin Framework]])
+3. Create a sqlc model with the following tables
+   1. USER - (primary_key, email, password, preferred_name, created_at, updated_at)
+   2. ROLE - (primary_key, role_name, role_description, created_at, updated_at)
+   3. USER_ROLE - join table linking users to all their roles.
+4. Create a new go-backend with the following rest api endpoints
+   1. =POST /login= (authenticate a user with username/password - and return jwt token - with roles)
+   2. =POST /user= (create a user and return their user id)
+   3. =PUT  /user/<email>= (update the user with the specified email and return their id)
+   4. =PUT  /user/role/<role_name>= (add the role to the user if it does not exist)
+   5. =GET /user/<email>= (return a user object with their email and all their roles)
+5. Apart from the =/login= endpoint, all endpoints should require authentication with jwt
+6. All the above methods except the =GET /user/<email>= should only be possible if the user has admin role.
+7. The =GET /user/<email>= should only allow the current user (based on the JWT)
+8. Add tests for all the above methods.
+*** Week 4 Objectives
+**** Integrate frontend with backend.
+1. Learn MUI
+2. Create a from scratch react application - with a login page.
+3. If the user successfuly logs in - take them to a user profile page with their role details (calling =GET /user/<email>=)
+4. If the user fails to login - show an error message.
+
+
