@@ -34,3 +34,6 @@ dist/bundle.js
 dist/bundle.js.map
 day1/node_modules
 node_modules
+/day1/dist/bundle.js
+/day1/pnpm-lock.yaml
+/day1/pnpm-workspace.yaml
