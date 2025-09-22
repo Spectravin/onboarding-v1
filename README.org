@@ -28,6 +28,20 @@
       2. Implement the lesson by following the react exercise in that section.
       3. Add a Jest based test to for that lesson ([[https://jestjs.io/docs/tutorial-react][Testing React]])
 ** Week 2 Objectives
+*** Learn React Router and MUI
+1. Learn React Router and how to use it in an existing project: [[https://reactrouter.com/][React Router]]
+2. Implement the react router tutorial application [[https://reactrouter.com/6.30.1/start/tutorial][Tutorial Application]]
+   However, implement it using the latest version of the react router application.
+3. Implement the App from week 1 - but using react router.
+   With each chapter being its own link, and clicking the link takes you to a different page - with the demo.
+4. Read through all the MUI Tutorial and components ([[https://mui.com/material-ui/getting-started/learn/][MUI Tutorial]])
+5. Example applications to Build
+   1. 2 column layout (with side navbar)
+   2. 3 column layout (with side navbar and drawer on the right)
+   3. 2 column layout with top navbar and drawer on the left.
+6. Combine the application built in step 2 along with MUI 
+      
+** Week 3 Objectives
 *** Complete golang course.
 1. Complete [[https://go.dev/tour/welcome/1][A Tour of Go]]
 2. Create a new directory for go learning (`learn_go`)
