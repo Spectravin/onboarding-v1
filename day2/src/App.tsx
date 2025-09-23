@@ -5,7 +5,6 @@ import Profile from './components/Profile';
 import TodoList from './components/TodoList';
  const App = () => {
   return <div>
-    Hello, World!
   <Firstcomponent />
   
   
