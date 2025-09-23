@@ -37,3 +37,7 @@ node_modules
 /day1/dist/bundle.js
 pnpm-lock.yaml
 pnpm-workspace.yaml
+modules.yaml
+gitignore
+LICENSE
+README.org
