@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {createRoot} from 'react-dom/client'
-import ReactingToUseInput from './ReactingToUserInput';
 import { AuthProvider } from './AuthProvider';
-import {SnackbarProvider} from "notistack"
+import {SnackbarProvider} from "notistack";
+import Navigation from './Navigation';
+import SnackBar from './SnackBar';
 const App = () => {
 
       const [pos, setPos] = useState();
@@ -11,8 +12,7 @@ const App = () => {
       
       <AuthProvider>
         <SnackbarProvider>
-          Hello day4
-         <ReactingToUseInput/>
+         <Navigation/>
         </SnackbarProvider>
       </AuthProvider>
 

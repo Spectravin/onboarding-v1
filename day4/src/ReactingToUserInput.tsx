@@ -1,7 +1,71 @@
 import React, { useContext, useState } from 'react';
 import SharingStateParent from './SharingStateParent';
 import {AuthContext,type AuthType} from './AuthProvider'
-import { enqueueSnackbar } from 'notistack';
+import SnackBar from './SnackBar';
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const FormTitle = styled.h3`
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledInput = styled.input`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 5px;
+
+  &:focus {
+    border-color: #61dafb;
+    outline: none;
+    box-shadow: 0 0 5px rgba(97, 218, 251, 0.6);
+  }
+`;
+
+const ErrorText = styled.span`
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #21a1f1;
+    color: white;
+  }
+`;
 
 const ReactingToUserInput = () => {
   const [input, setInput] = useState({ userName: '', userEmail: '' });
@@ -47,61 +111,49 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     if (validate()) {
       setFormData(input);
       login();
-      enqueueSnackbar("Login Successfull",{
-        variant:"success",
-        autoHideDuration:2000,
-        anchorOrigin:{
-          vertical:"top",
-          horizontal:"center"
-        }
-      })
+
     }else{
       logout();
-      enqueueSnackbar("unable to Login",{
-        variant:"info",
-        autoHideDuration:2000,
-        anchorOrigin:{
-          vertical:"top",
-          horizontal:"center"
-        }})
       };
     }
   return (
-    <div>
-      <h3>ReactingToUserInput</h3>
-      <form onSubmit={handleSubmit} style={{right:"20%"}}>
-        <div>
+    <>
+    <FormContainer>
+      <FormTitle>ReactingToUserInput</FormTitle>
+      <StyledForm  onSubmit={handleSubmit} style={{right:"20%"}}>
+        <FormGroup>
           <label>User Name: </label>
-          <input
+          <StyledInput
             name="userName"
             value={input.userName}
             onChange={handleChange}
             placeholder="Enter your name"
             type="text"
           />
-          <span style={{ color: 'red' }}>{error.nameError}</span>
-        </div>
-        <div>
+          <ErrorText>{error.nameError}</ErrorText>
+        </FormGroup>
+        <FormGroup>
           <label>Email ID: </label>
-          <input
+          <StyledInput
             name="userEmail"
             value={input.userEmail}
             onChange={handleChange}
             placeholder="Enter your Email"
             type="text"
           />
-          <span style={{ color: 'red' }}>{error.emailError}</span>
-        </div>
-        <button
+          <ErrorText style={{ color: 'red' }}>{error.emailError}</ErrorText>
+        </FormGroup>
+        <SubmitButton 
           type="submit"
         >
           Submit
-        </button>
-      </form>
+        </SubmitButton>
+      </StyledForm>
       <h4>Welcome {formData.userName}</h4>
       <h4>Email: {formData.userEmail}</h4>
-      <SharingStateParent/>
-    </div>
+    </FormContainer>
+    <SnackBar/>
+    </>
   );
 };
 
