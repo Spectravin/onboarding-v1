@@ -23,7 +23,10 @@
     "@babel/preset-react": "^7.27.1",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
+<<<<<<< HEAD
     "@types/styled-components": "^5.1.34",
+=======
+>>>>>>> bbf01b666ad1e59977f384597c7f59cfba33e343
     "babel-loader": "^10.0.0",
     "esbuild": "^0.25.10",
     "eslint": "^9.35.0",
@@ -34,7 +37,11 @@
   "dependencies": {
     "notistack": "^3.0.2",
     "react": "^19.1.1",
+<<<<<<< HEAD
     "react-dom": "^19.1.1",
     "styled-components": "^6.1.19"
+=======
+    "react-dom": "^19.1.1"
+>>>>>>> bbf01b666ad1e59977f384597c7f59cfba33e343
   }
 }

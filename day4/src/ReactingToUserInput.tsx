@@ -3,6 +3,7 @@ import SharingStateParent from './SharingStateParent';
 import {AuthContext,type AuthType} from './AuthProvider'
 import SnackBar from './SnackBar';
 import styled from 'styled-components';
+import { enqueueSnackbar } from 'notistack';
 
 const FormContainer = styled.div`
   max-width: 400px;
@@ -111,49 +112,61 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     if (validate()) {
       setFormData(input);
       login();
-
+      enqueueSnackbar("Login Successfull",{
+        variant:"success",
+        autoHideDuration:2000,
+        anchorOrigin:{
+          vertical:"top",
+          horizontal:"center"
+        }
+      })
     }else{
       logout();
+      enqueueSnackbar("unable to Login",{
+        variant:"info",
+        autoHideDuration:2000,
+        anchorOrigin:{
+          vertical:"top",
+          horizontal:"center"
+        }})
       };
     }
   return (
-    <>
-    <FormContainer>
-      <FormTitle>ReactingToUserInput</FormTitle>
-      <StyledForm  onSubmit={handleSubmit} style={{right:"20%"}}>
-        <FormGroup>
+    <div>
+      <h3>ReactingToUserInput</h3>
+      <form onSubmit={handleSubmit} style={{right:"20%"}}>
+        <div>
           <label>User Name: </label>
-          <StyledInput
+          <input
             name="userName"
             value={input.userName}
             onChange={handleChange}
             placeholder="Enter your name"
             type="text"
           />
-          <ErrorText>{error.nameError}</ErrorText>
-        </FormGroup>
-        <FormGroup>
+          <span style={{ color: 'red' }}>{error.nameError}</span>
+        </div>
+        <div>
           <label>Email ID: </label>
-          <StyledInput
+          <input
             name="userEmail"
             value={input.userEmail}
             onChange={handleChange}
             placeholder="Enter your Email"
             type="text"
           />
-          <ErrorText style={{ color: 'red' }}>{error.emailError}</ErrorText>
-        </FormGroup>
-        <SubmitButton 
+          <span style={{ color: 'red' }}>{error.emailError}</span>
+        </div>
+        <button
           type="submit"
         >
           Submit
-        </SubmitButton>
-      </StyledForm>
+        </button>
+      </form>
       <h4>Welcome {formData.userName}</h4>
       <h4>Email: {formData.userEmail}</h4>
-    </FormContainer>
-    <SnackBar/>
-    </>
+      <SharingStateParent/>
+    </div>
   );
 };
 
