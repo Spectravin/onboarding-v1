@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
-import ReactingToUserInput from './ReactingToUserInput';
-import Chatbox from './PreservingAndResettingState/Chatbox';
-import CounterReducer from './CounterReducer';
-import SharingStateParent from './SharingStateParent';
+import ReactingToUserInput from './components/ReactingToUserInput';
+import Chatbox from './components/PreservingAndResettingState/Chatbox';
+import CounterReducer from './components/CounterReducer';
+import SharingStateParent from './components/PanelSelection/SharingStateParent';
 import styled from 'styled-components';
 
 const Layout = styled.div`

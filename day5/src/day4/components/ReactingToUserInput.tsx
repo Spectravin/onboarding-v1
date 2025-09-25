@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
-import SharingStateParent from './SharingStateParent';
-import {AuthContext,type AuthType} from './AuthProvider'
-import SnackBar from './SnackBar';
+import SharingStateParent from './PanelSelection/SharingStateParent';
+import {AuthContext,type AuthType} from '../../AuthProvider'
+import SnackBar from '../SnackBar';
 import styled from 'styled-components';
 import { enqueueSnackbar } from 'notistack';
 
@@ -132,41 +132,43 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
       };
     }
   return (
-    <div>
-      <h3>ReactingToUserInput</h3>
-      <form onSubmit={handleSubmit} style={{right:"20%"}}>
-        <div>
-          <label>User Name: </label>
-          <input
-            name="userName"
-            value={input.userName}
-            onChange={handleChange}
-            placeholder="Enter your name"
-            type="text"
-          />
-          <span style={{ color: 'red' }}>{error.nameError}</span>
-        </div>
-        <div>
-          <label>Email ID: </label>
-          <input
-            name="userEmail"
-            value={input.userEmail}
-            onChange={handleChange}
-            placeholder="Enter your Email"
-            type="text"
-          />
-          <span style={{ color: 'red' }}>{error.emailError}</span>
-        </div>
-        <button
-          type="submit"
-        >
-          Submit
-        </button>
-      </form>
+    <FormContainer>
+      <FormTitle>ReactingToUserInput</FormTitle>
+      <>
+          <StyledForm onSubmit={handleSubmit} style={{right:"20%"}}>
+          <FormGroup>
+            <label>User Name: </label>
+            <StyledInput
+              name="userName"
+              value={input.userName}
+              onChange={handleChange}
+              placeholder="Enter your name"
+              type="text"
+            />
+            <ErrorText style={{ color: 'red' }}>{error.nameError}</ErrorText>
+          </FormGroup>
+          <FormGroup>
+            <label>Email ID: </label>
+            <StyledInput
+              name="userEmail"
+              value={input.userEmail}
+              onChange={handleChange}
+              placeholder="Enter your Email"
+              type="text"
+            />
+            <ErrorText style={{ color: 'red' }}>{error.emailError}</ErrorText>
+          </FormGroup>
+          <SubmitButton
+            type="submit"
+          >
+            Submit
+          </SubmitButton>
+        </StyledForm>
+      </>
+
       <h4>Welcome {formData.userName}</h4>
       <h4>Email: {formData.userEmail}</h4>
-      <SharingStateParent/>
-    </div>
+    </FormContainer>
   );
 };
 
