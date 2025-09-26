@@ -1,53 +1,7 @@
 import React, { useReducer } from 'react';
-import styled from 'styled-components';
+import { Box, Typography, Button, Stack, Paper } from '@mui/material';
 
-const Card = styled.div`
-  max-width: 300px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
-`;
-
-const CountText = styled.p`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  color: #333;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-`;
-
-const ActionButton = styled.button`
-  padding: 10px 16px;
-  background: #61dafb;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background: #21a1f1;
-    color: white;
-  }
-`;
-
-const ResetButton = styled(ActionButton)`
-  background: #ff6b6b;
-
-  &:hover {
-    background: #e63946;
-  }
-`;
-
-function counterReducer(state:any, action:any) {
+function counterReducer(state: any, action: any) {
   switch (action.type) {
     case 'increment':
       return { count: state.count + 1 };
@@ -62,25 +16,36 @@ function counterReducer(state:any, action:any) {
 
 const initialState = { count: 0 };
 
-const CounterReducer=()=> {
+const CounterReducer = () => {
   const [state, dispatch] = useReducer(counterReducer, initialState);
 
   return (
-   <Card>
-      <CountText>Count: {state.count}</CountText>
-      <ButtonGroup>
-        <ActionButton onClick={() => dispatch({ type: "increment" })}>
+    <Paper
+      sx={{
+        maxWidth: 300,
+        mx: 'auto',
+        mt: 4,
+        p: 3,
+        textAlign: 'center',
+      }}
+      elevation={3}
+    >
+      <Typography variant="h5" mb={2}>
+        Count: {state.count}
+      </Typography>
+      <Stack direction="row" spacing={2} justifyContent="center">
+        <Button variant="contained" color="primary" onClick={() => dispatch({ type: 'increment' })}>
           Increment
-        </ActionButton>
-        <ActionButton onClick={() => dispatch({ type: "decrement" })}>
+        </Button>
+        <Button variant="contained" color="primary" onClick={() => dispatch({ type: 'decrement' })}>
           Decrement
-        </ActionButton>
-        <ResetButton onClick={() => dispatch({ type: "reset" })}>
+        </Button>
+        <Button variant="contained" color="error" onClick={() => dispatch({ type: 'reset' })}>
           Reset
-        </ResetButton>
-      </ButtonGroup>
-    </Card>
+        </Button>
+      </Stack>
+    </Paper>
   );
-}
+};
 
 export default CounterReducer;

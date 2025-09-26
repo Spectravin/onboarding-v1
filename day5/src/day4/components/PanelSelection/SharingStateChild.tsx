@@ -1,49 +1,35 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from 'react';
+import { Paper, Typography, Collapse, Box } from '@mui/material';
 
-const ChildCard = styled.div<{ $isActive: boolean }>`
-  border: 2px solid ${(props) => (props.$isActive ? "#61dafb" : "#ccc")};
-  background-color: ${(props) => (props.$isActive ? "#e6f7ff" : "#f9f9f9")};
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    border-color: #61dafb;
-  }
-`;
-const ChildTitle = styled.h3`
-  margin: 0;
-  font-size: 1.2rem;
-  color: #222;
-`;
-
-const ChildContent = styled.p`
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.5;
-`;
-
-interface parentProps{
-     title: string;
+interface Props {
+  title: string;
   children: React.ReactNode;
   isActive: boolean;
   onShow: () => void;
 }
 
-
-const SharingStateChild = ({title,children,isActive,onShow}:parentProps) => {
+const SharingStateChild: React.FC<Props> = ({ title, children, isActive, onShow }) => {
   return (
-    <div>
-         <ChildCard $isActive={isActive} onClick={onShow}>
-      <ChildTitle>{title}</ChildTitle>
-      {isActive && <ChildContent>{children}</ChildContent>}
-    </ChildCard>
-    </div>
-  )
-}
+    <Paper
+      elevation={isActive ? 6 : 1}
+      onClick={onShow}
+      sx={{
+        mb: 2,
+        p: 2,
+        cursor: 'pointer',
+        border: (theme) => `2px solid ${isActive ? theme.palette.primary.main : '#ccc'}`,
+        backgroundColor: isActive ? '#e6f7ff' : '#f9f9f9',
+        transition: '0.3s',
+      }}
+    >
+      <Typography variant="h6">{title}</Typography>
+      <Collapse in={isActive}>
+        <Box mt={1}>
+          <Typography>{children}</Typography>
+        </Box>
+      </Collapse>
+    </Paper>
+  );
+};
 
-export default SharingStateChild
+export default SharingStateChild;

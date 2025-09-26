@@ -1,72 +1,93 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
 import { useNavigate, useLocation, type NavigateFunction } from "react-router-dom";
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  IconButton,
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  CssBaseline,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
-const Sidebar = styled.nav`
-  width: 220px;
-  background-color: #20232a;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-`;
-
-const NavButton = styled.button<{ active?: boolean }>`
-  border: none;
-  text-align: left;
-  padding: 10px;
-  margin: 5px 0;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.2s;
-
-  background-color: ${({ active }) => (active ? "#61dafb" : "transparent")};
-  color: ${({ active }) => (active ? "black" : "white")};
-  border-radius: ${({ active }) => (active ? "6px" : "0")};
-
-  &:hover {
-    background-color: #61dafb;
-    color: black;
-    border-radius: 6px;
-  }
-`;
+const drawerWidth = 220;
 
 const Navigation = () => {
+  const [open, setOpen] = useState(false);
   const navigate: NavigateFunction = useNavigate();
   const location = useLocation();
 
+  const navItems = [
+    { label: "Day 1", path: "/" },
+    { label: "Day 2", path: "/day2" },
+    { label: "Day 3", path: "/day3" },
+    { label: "Day 4", path: "/day4" },
+  ];
+
   return (
-    <Sidebar>
-      <NavButton
-        onClick={() => navigate("/")}
-        active={location.pathname === "/"}
-      >
-        Day 1
-      </NavButton>
+    <Box sx={{ display: "flex" }}>
+      <CssBaseline />
 
-      <NavButton
-        onClick={() => navigate("/day2")}
-        active={location.pathname.startsWith("/day2")}
+      <AppBar
+        position="fixed"
+        sx={{
+          background: "#20232a",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
       >
-        Day 2
-      </NavButton>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setOpen(true)}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            My Navigation
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-      <NavButton
-        onClick={() => navigate("/day3")}
-        active={location.pathname.startsWith("/day3")}
+      <Drawer
+        variant="temporary"  
+        anchor="left"
+        open={open}
+        onClose={() => setOpen(false)}  
+        sx={{
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            backgroundColor: "#20232a",
+            color: "white",
+          },
+        }}
       >
-        Day 3
-      </NavButton>
-
-      <NavButton
-        onClick={() => navigate("/day4")}
-        active={location.pathname.startsWith("/day4")}
-      >
-        Day 4
-      </NavButton>
-      
-
-    </Sidebar>
+        <Toolbar />
+        <List>
+          {navItems.map((item) => (
+            <ListItem key={item.path} disablePadding>
+              <ListItemButton
+                selected={location.pathname === item.path}
+                onClick={() => {
+                  navigate(item.path);
+                  setOpen(false); 
+                }}
+              >
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+    </Box>
   );
 };
 

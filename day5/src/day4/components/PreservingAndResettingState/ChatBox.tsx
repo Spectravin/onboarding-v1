@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Sidebar = styled.div`
   width: 250px;
-  background: #ddebfdff;
+  background: #337fe2ff;
   color: white;
   display: flex;
   flex-direction: column;
@@ -24,9 +24,7 @@ export type ContactListProps = {
             selectedContact?:ContactObj | undefined,
             onClick:(c:ContactObj)=>void
 }
-export type MessengerProps = {
-    selectedContact?:ContactObj | undefined
-}
+
 const ChatBox = () => {
         const contacts:ContactObj[] = [
             {id:1,name:"Alice", email:"Alice@gmail.com"},
@@ -43,7 +41,7 @@ const ChatBox = () => {
         selectedContact={selectedContact}
         onClick={(c: ContactObj) => setSelectedContact(c)}
       />
-      <Messenger key={selectedContact?.email} selectedContact={selectedContact} />
+      <Messenger selectedContact={selectedContact} />
     </Container></>
   )
 }

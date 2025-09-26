@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import styled from "styled-components";
+import { Box, Tabs, Tab, Typography } from "@mui/material";
 
 const menuItems = [
   { path: "profile", label: "Profile" },
@@ -16,52 +16,39 @@ const menuItems = [
 const Day2: React.FC = () => {
   const location = useLocation();
 
-  return (
-    <div>
-      <h1>Day2: Describing the UI</h1>
+  const activeIndex = menuItems.findIndex((item) =>
+    location.pathname.endsWith(item.path)
+  );
 
-    
-      <MenuBar>
-        {menuItems.map((item) => {
-          const active = location.pathname.endsWith(item.path);
-          return (
-            <StyledLink
-              key={item.path}
-              to={item.path}
-              $active={active}
-            >
-              {item.label}
-            </StyledLink>
-          );
-        })}
-      </MenuBar>
+  return (
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Day2: Describing the UI
+      </Typography>
+
+      <Tabs
+        value={activeIndex === -1 ? false : activeIndex}
+        textColor="primary"
+        indicatorColor="primary"
+        variant="scrollable"
+        scrollButtons="auto"
+        sx={{ mb: 2 }}
+      >
+        {menuItems.map((item, index) => (
+          <Tab
+            key={item.path}
+            label={item.label}
+            component={Link}
+            to={item.path}
+            sx={{ textTransform: "none", fontWeight: activeIndex === index ? "bold" : "normal" }}
+          />
+        ))}
+      </Tabs>
 
       <hr />
       <Outlet />
-    </div>
+    </Box>
   );
 };
 
 export default Day2;
-
-const MenuBar = styled.nav`
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-`;
-
-const StyledLink = styled(Link)<{ $active: boolean }>`
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
-  background: ${(props) => (props.$active ? "#61dafb" : "#e0e0e0")};
-  color: ${(props) => (props.$active ? "black" : "inherit")};
-  transition: background 0.2s;
-
-  &:hover {
-    background: ${(props) => (props.$active ? "#21a1f1" : "#d5d5d5")};
-  }
-`;

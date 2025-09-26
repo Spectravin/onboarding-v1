@@ -1,28 +1,15 @@
-import React from 'react'
-import {useState} from 'react'
+import React, { useState } from 'react';
+import { Box, Typography, Paper } from '@mui/material';
 import SharingStateChild from './SharingStateChild';
-import styled from 'styled-components';
-const ParentContainer = styled.div`
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 1rem;
-  font-family: Arial, sans-serif;
-`;
-
-const ParentTitle = styled.h2`
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #333;
-`;
-
 
 const SharingStateParent = () => {
-  const[activeIndex,setActiveIndex]=useState(0);
-
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div>   <ParentContainer>
-      <ParentTitle>Sharing State Between Components</ParentTitle>
+    <Box maxWidth={600} mx="auto" mt={4} p={2}>
+      <Typography variant="h5" align="center" mb={2}>
+        Sharing State Between Components
+      </Typography>
 
       <SharingStateChild
         title="Child 1"
@@ -39,15 +26,10 @@ const SharingStateParent = () => {
         onShow={() => setActiveIndex(1)}
       >
         The name comes from алма, the Kazakh word for "apple" and is often
-        translated as "full of apples". In fact, the region surrounding Almaty
-        is thought to be the ancestral home of the apple, and the wild Malus
-        sieversii is considered a likely candidate for the ancestor of the
-        modern domestic apple.
+        translated as "full of apples". Wild Malus sieversii is considered
+        the ancestor of modern domestic apple.
       </SharingStateChild>
-    </ParentContainer>
-
-    </div>
-  )
-}
-
-export default SharingStateParent
+    </Box>
+  );
+};
+export default SharingStateParent;

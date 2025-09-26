@@ -7,10 +7,13 @@ import {
 } from "react-router-dom";
 
 import router from './routes'
-
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./Theme";
 const App = () => (
   <AuthProvider>
-    <RouterProvider router={router} />
+     <ThemeProvider theme={theme}>
+          <RouterProvider router={router} />
+          </ThemeProvider>
   </AuthProvider>
 );
 

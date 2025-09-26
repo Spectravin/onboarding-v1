@@ -1,99 +1,35 @@
 import React, { useContext, useState } from 'react';
-import SharingStateParent from './PanelSelection/SharingStateParent';
-import {AuthContext,type AuthType} from '../../AuthProvider'
-import SnackBar from '../SnackBar';
-import styled from 'styled-components';
+import { Box, Typography, TextField, Button } from '@mui/material';
+import { AuthContext } from '../../AuthProvider';
 import { enqueueSnackbar } from 'notistack';
-
-const FormContainer = styled.div`
-  max-width: 400px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-`;
-
-const FormTitle = styled.h3`
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const FormGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledInput = styled.input`
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-  margin-top: 5px;
-
-  &:focus {
-    border-color: #61dafb;
-    outline: none;
-    box-shadow: 0 0 5px rgba(97, 218, 251, 0.6);
-  }
-`;
-
-const ErrorText = styled.span`
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 5px;
-`;
-
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  background-color: #61dafb;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-
-  &:hover {
-    background-color: #21a1f1;
-    color: white;
-  }
-`;
+import SharingStateParent from './PanelSelection/SharingStateParent';
 
 const ReactingToUserInput = () => {
   const [input, setInput] = useState({ userName: '', userEmail: '' });
   const [formData, setFormData] = useState({ userName: '', userEmail: '' });
   const [error, setError] = useState({ nameError: '', emailError: '' });
 
-    const auth=useContext(AuthContext);
-    if(!auth){
-      throw new Error('useAuth must be used within AuthProvider');
-    }
-    const {isLoggedIn,login,logout}=auth;
-
-  
+  const auth = useContext(AuthContext);
+  if (!auth) throw new Error('useAuth must be used within AuthProvider');
+  const { isLoggedIn, login, logout } = auth;
 
   const validate = () => {
     let isValid = true;
     const newErrors = { nameError: '', emailError: '' };
 
-    if (input.userName.trim() == '') {
+    if (input.userName.trim() === '') {
       newErrors.nameError = 'Enter a valid name.';
       isValid = false;
     }
-    
-    if (input.userEmail.trim() == '') {
+
+    if (input.userEmail.trim() === '') {
       newErrors.emailError = 'Enter a valid email ID.';
       isValid = false;
-    } else if (!(input.userEmail.trim().match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,6}$/))) {
+    } else if (
+      !input.userEmail
+        .trim()
+        .match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+[.][a-zA-Z]{2,6}$/)
+    ) {
       newErrors.emailError = 'Invalid email ID.';
       isValid = false;
     }
@@ -102,73 +38,86 @@ const ReactingToUserInput = () => {
     return isValid;
   };
 
-const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInput(prev => ({ ...prev, [name]: value }));
+    setInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validate()) {
       setFormData(input);
       login();
-      enqueueSnackbar("Login Successfull",{
-        variant:"success",
-        autoHideDuration:2000,
-        anchorOrigin:{
-          vertical:"top",
-          horizontal:"center"
-        }
-      })
-    }else{
+      enqueueSnackbar('Login Successful', {
+        variant: 'success',
+        autoHideDuration: 2000,
+        anchorOrigin: { vertical: 'top', horizontal: 'center' },
+      });
+    } else {
       logout();
-      enqueueSnackbar("unable to Login",{
-        variant:"info",
-        autoHideDuration:2000,
-        anchorOrigin:{
-          vertical:"top",
-          horizontal:"center"
-        }})
-      };
+      enqueueSnackbar('Unable to Login', {
+        variant: 'info',
+        autoHideDuration: 2000,
+        anchorOrigin: { vertical: 'top', horizontal: 'center' },
+      });
     }
-  return (
-    <FormContainer>
-      <FormTitle>ReactingToUserInput</FormTitle>
-      <>
-          <StyledForm onSubmit={handleSubmit} style={{right:"20%"}}>
-          <FormGroup>
-            <label>User Name: </label>
-            <StyledInput
-              name="userName"
-              value={input.userName}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              type="text"
-            />
-            <ErrorText style={{ color: 'red' }}>{error.nameError}</ErrorText>
-          </FormGroup>
-          <FormGroup>
-            <label>Email ID: </label>
-            <StyledInput
-              name="userEmail"
-              value={input.userEmail}
-              onChange={handleChange}
-              placeholder="Enter your Email"
-              type="text"
-            />
-            <ErrorText style={{ color: 'red' }}>{error.emailError}</ErrorText>
-          </FormGroup>
-          <SubmitButton
-            type="submit"
-          >
-            Submit
-          </SubmitButton>
-        </StyledForm>
-      </>
+  };
 
-      <h4>Welcome {formData.userName}</h4>
-      <h4>Email: {formData.userEmail}</h4>
-    </FormContainer>
+  return (
+    <Box
+      sx={{
+        maxWidth: 400,
+        mx: 'auto',
+        mt: 4,
+        p: 3,
+        border: '1px solid #ddd',
+        borderRadius: 2,
+        backgroundColor: '#fff',
+        boxShadow: 1,
+      }}
+    >
+      <Typography variant="h5" align="center" mb={2}>
+        ReactingToUserInput
+      </Typography>
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+      >
+        <TextField
+          label="User Name"
+          name="userName"
+          value={input.userName}
+          onChange={handleChange}
+          error={!!error.nameError}
+          helperText={error.nameError}
+          fullWidth
+          size="small"
+        />
+        <TextField
+          label="Email ID"
+          name="userEmail"
+          value={input.userEmail}
+          onChange={handleChange}
+          error={!!error.emailError}
+          helperText={error.emailError}
+          fullWidth
+          size="small"
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </Box>
+
+      {formData.userName && (
+        <Box mt={2}>
+          <Typography>Welcome {formData.userName}</Typography>
+          <Typography>Email: {formData.userEmail}</Typography>
+        </Box>
+      )}
+
+    </Box>
   );
 };
 

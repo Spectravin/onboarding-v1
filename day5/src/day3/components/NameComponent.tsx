@@ -9,10 +9,9 @@ function NameComponent() {
     name = event.target.value;
   }
 
-  function clickButton(event: React.MouseEvent<HTMLButtonElement>) {
+  function clickButton(event: React.MouseEvent<HTMLButtonElement>):void {
     alert("Hi " + name);
   }
-
   return (
     <Container>
       <StyledInput onChange={handleChange} placeholder="Enter your name" />
