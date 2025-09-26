@@ -1,7 +1,72 @@
 import React, { useContext, useState } from 'react';
-import SharingStateParent from './SharingStateParent';
-import {AuthContext,type AuthType} from './AuthProvider'
+import SharingStateParent from './PanelSelection/SharingStateParent';
+import {AuthContext,type AuthType} from '../AuthProvider'
+import SnackBar from '../SnackBar';
+import styled from 'styled-components';
 import { enqueueSnackbar } from 'notistack';
+
+const FormContainer = styled.div`
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+`;
+
+const FormTitle = styled.h3`
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledInput = styled.input`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 5px;
+
+  &:focus {
+    border-color: #61dafb;
+    outline: none;
+    box-shadow: 0 0 5px rgba(97, 218, 251, 0.6);
+  }
+`;
+
+const ErrorText = styled.span`
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
+`;
+
+const SubmitButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #21a1f1;
+    color: white;
+  }
+`;
 
 const ReactingToUserInput = () => {
   const [input, setInput] = useState({ userName: '', userEmail: '' });
